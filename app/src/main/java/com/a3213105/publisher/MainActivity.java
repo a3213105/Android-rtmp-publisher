@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void publish() {
-        final CameraSurfaceView preview = (CameraSurfaceView) findViewById(com.a3213105.publisher.R.id.surfaceView);
+        final SurfaceView preview = (SurfaceView) findViewById(R.id.surfaceView);
         SurfaceHolder holder = preview.getHolder();
         // setType must be set in old version, otherwise may cause crash
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -123,11 +124,11 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(com.a3213105.publisher.R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         //publish();
-        btn = findViewById(com.a3213105.publisher.R.id.button);
+        btn = findViewById(R.id.button);
         btn.setOnClickListener(new PhotoOnClickListener());
-        bitrate = (TextView) findViewById(com.a3213105.publisher.R.id.bitrate);
+        bitrate = (TextView) findViewById(R.id.bitrate);
         startBitrateTimer();
     }
 
