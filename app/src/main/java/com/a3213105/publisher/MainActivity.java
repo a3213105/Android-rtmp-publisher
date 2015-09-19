@@ -2,6 +2,7 @@ package com.a3213105.publisher;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Surface;
@@ -23,7 +24,9 @@ public class MainActivity extends AppCompatActivity  {
     private AudioProcessor ap;
     private RTMPSender sender;
     private boolean hasVideo = false;
+    private boolean isAnnexbVideo = true;
     private boolean hasAudio = false;
+    private boolean isADTSAudio = false;
     private TextView bitrate;
     private View btn;
     private long lastByteSended = 0;
@@ -65,11 +68,11 @@ public class MainActivity extends AppCompatActivity  {
             if(ap==null)
                 ap = new AudioProcessor(sender);
 
-            hasVideo = (vp.initVideo()==0)?true:false;
-            hasAudio = false;//ap.initAudio()==0?true:false;
+            hasVideo = vp.initVideo()==0;
+            hasAudio = ap.initAudio()==0;
 
-            //sender.initSender(hasVideo, hasAudio, Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.flv");
-            sender.initSender(hasVideo, hasAudio, rtmp_url);
+            //sender.initSender(hasVideo, isAnnexbVideo, hasAudio, isADTSAudio, Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.flv");
+            sender.initSender(hasVideo, isAnnexbVideo, hasAudio, isADTSAudio, rtmp_url);
 
             presentationTimeUs = System.currentTimeMillis();
             if(hasVideo) {

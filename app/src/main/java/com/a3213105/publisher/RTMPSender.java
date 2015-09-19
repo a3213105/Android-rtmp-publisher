@@ -36,7 +36,6 @@ public class RTMPSender {
             dst = new byte[size];
             bb.get(dst);
         }
-
         int ret = _write_rtmp_audio(dst, size, pts);
         if(ret < 0 ) {
             Log.w(TAG, "write audio data error:" + ret);
@@ -63,8 +62,8 @@ public class RTMPSender {
         }
     }
 
-    public void initSender(boolean has_video, boolean has_audio, String url) {
-        _set_output_url(has_video ? 1 : 0, has_audio ? 1 : 0, url);
+    public void initSender(boolean has_video, boolean isAnnexb, boolean has_audio, boolean isRaw, String url) {
+        _set_output_url(has_video ? 1 : 0, isAnnexb ? 1 : 0, has_audio ? 1 : 0, isRaw ? 1 : 0, url);
     }
 
     public void startSender() {
@@ -120,7 +119,7 @@ public class RTMPSender {
         Log.i(TAG, "rtmpjni.so loaded");
     }
 
-    private native int _set_output_url(int havV, int hasA, String url);
+    private native int _set_output_url(int havV, int isAnnexb, int hasA, int isRaw, String url);
     private native int _open();
     private native int _close();
     private native int _loop();

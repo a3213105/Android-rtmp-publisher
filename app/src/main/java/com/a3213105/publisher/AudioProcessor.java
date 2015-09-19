@@ -155,6 +155,7 @@ public class AudioProcessor {
     public void startAudio(long us) {
         presentationTimeUs = us;
         encoder.start();
+        mic.startRecording();
 
         worker = new Thread(new Runnable() {
 
