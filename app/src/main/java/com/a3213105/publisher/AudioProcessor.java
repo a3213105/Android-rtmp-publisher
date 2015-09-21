@@ -82,7 +82,7 @@ public class AudioProcessor {
         ByteBuffer[] outBuffers = encoder.getOutputBuffers();
 
         if (true) {
-            int inBufferIndex = encoder.dequeueInputBuffer(10);
+            int inBufferIndex = encoder.dequeueInputBuffer(-1);
             if (inBufferIndex >= 0) {
                 ByteBuffer bb = inBuffers[inBufferIndex];
                 bb.clear();
